@@ -1,0 +1,1262 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LearnNEU — Understand How You Learn</title>
+    <meta name="description"
+        content="LearnNEU helps students understand their learning patterns, identify gaps and improve their study strategies.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #07070b;
+            color: #f5f3ff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ---------------- NAVBAR ---------------- */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 22px 7%;
+
+            background: rgba(7, 7, 11, 0.75);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #9b5cff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #aaa6b9;
+            font-size: 14px;
+            transition: 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-button {
+            padding: 10px 18px;
+            border-radius: 10px;
+            background: #8b45ff;
+            color: white !important;
+        }
+
+        .nav-button:hover {
+            background: #a56aff;
+        }
+
+        /* ---------------- HERO ---------------- */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 140px 7% 100px;
+
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+
+            background: #762cff;
+            filter: blur(180px);
+            opacity: 0.18;
+
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 14px;
+            border-radius: 30px;
+
+            border: 1px solid rgba(155,92,255,0.35);
+            background: rgba(155,92,255,0.08);
+
+            color: #c8a7ff;
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            background: #a66cff;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #a66cff;
+        }
+
+        h1 {
+            font-size: clamp(48px, 8vw, 88px);
+            line-height: 0.98;
+            letter-spacing: -5px;
+            margin-bottom: 28px;
+        }
+
+        h1 .purple {
+            color: #a66cff;
+        }
+
+        .hero-description {
+            max-width: 680px;
+            margin: auto;
+
+            color: #aaa6b9;
+            font-size: 18px;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .primary-button,
+        .secondary-button {
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: 0.25s;
+        }
+
+        .primary-button {
+            background: #8b45ff;
+            box-shadow: 0 10px 35px rgba(139,69,255,0.25);
+        }
+
+        .primary-button:hover {
+            transform: translateY(-3px);
+            background: #9d60ff;
+        }
+
+        .secondary-button {
+            border: 1px solid #2c2935;
+            color: #d7d3df;
+        }
+
+        .secondary-button:hover {
+            border-color: #7050a7;
+            background: #121019;
+        }
+
+        /* ---------------- SECTIONS ---------------- */
+
+        section {
+            padding: 110px 7%;
+        }
+
+        .section-label {
+            color: #a66cff;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 55px);
+            letter-spacing: -2px;
+            line-height: 1.05;
+            margin-bottom: 18px;
+        }
+
+        .section-description {
+            color: #9995a6;
+            max-width: 650px;
+        }
+
+        /* ---------------- INTRO ---------------- */
+
+        .intro {
+            border-top: 1px solid #17151d;
+            border-bottom: 1px solid #17151d;
+        }
+
+        .intro-grid {
+            max-width: 1200px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .intro-text p {
+            color: #aaa6b9;
+            margin-top: 25px;
+            font-size: 16px;
+        }
+
+        .concept-box {
+            padding: 35px;
+            border-radius: 24px;
+
+            background: linear-gradient(
+                145deg,
+                #111017,
+                #0b0a0f
+            );
+
+            border: 1px solid #26212f;
+
+            box-shadow:
+                0 25px 80px rgba(0,0,0,0.4);
+        }
+
+        .concept-title {
+            font-size: 14px;
+            color: #777281;
+            margin-bottom: 25px;
+        }
+
+        .flow {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .flow-item {
+            padding: 18px;
+            border-radius: 14px;
+
+            background: #14121a;
+            border: 1px solid #24202c;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flow-item strong {
+            font-size: 16px;
+        }
+
+        .flow-item span {
+            font-size: 12px;
+            color: #8f899d;
+        }
+
+        .arrow {
+            color: #9254ff;
+        }
+
+        /* ---------------- FEATURES ---------------- */
+
+        .features {
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        .feature-header {
+            margin-bottom: 55px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature-card {
+            padding: 30px;
+            min-height: 250px;
+
+            border-radius: 20px;
+            background: #0d0c11;
+            border: 1px solid #211e27;
+
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: #503577;
+            background: #100e15;
+        }
+
+        .feature-icon {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: rgba(139,69,255,0.12);
+            color: #ae7aff;
+
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #8f8a99;
+            font-size: 14px;
+        }
+
+        /* ---------------- ANALYSIS ---------------- */
+
+        .analysis {
+            background: #09080d;
+            border-top: 1px solid #17151d;
+            border-bottom: 1px solid #17151d;
+        }
+
+        .analysis-container {
+            max-width: 1200px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .brain {
+            width: 100%;
+            max-width: 470px;
+            aspect-ratio: 1;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(166,108,255,0.28),
+                    rgba(93,35,171,0.08) 40%,
+                    transparent 65%
+                );
+
+            border: 1px solid rgba(166,108,255,0.18);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            box-shadow:
+                0 0 100px rgba(123,55,220,0.12);
+        }
+
+        .brain-inner {
+            width: 55%;
+            height: 55%;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(175,124,255,0.25),
+                    rgba(104,46,185,0.08)
+                );
+
+            border: 1px solid rgba(178,126,255,0.25);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 70px;
+        }
+
+        .orbit {
+            position: absolute;
+            border: 1px dashed rgba(166,108,255,0.25);
+            border-radius: 50%;
+        }
+
+        .orbit.one {
+            width: 75%;
+            height: 75%;
+        }
+
+        .orbit.two {
+            width: 92%;
+            height: 92%;
+        }
+
+        .analysis-points {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .analysis-point {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+
+            color: #aaa6b9;
+            font-size: 14px;
+        }
+
+        .check {
+            color: #a66cff;
+            font-weight: bold;
+        }
+
+        /* ---------------- PROCESS ---------------- */
+
+        .process {
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .process-grid {
+            margin-top: 60px;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .process-card {
+            padding: 30px 20px;
+
+            border-radius: 18px;
+            background: #0e0d12;
+            border: 1px solid #211e27;
+
+            position: relative;
+        }
+
+        .process-number {
+            font-size: 12px;
+            color: #8f899d;
+            margin-bottom: 20px;
+        }
+
+        .process-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .process-card p {
+            font-size: 13px;
+            color: #8f899d;
+        }
+
+        /* ---------------- TEAM ---------------- */
+
+        .team {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .team-card {
+            padding: 35px;
+            text-align: center;
+
+            background: #0d0c11;
+            border: 1px solid #211e27;
+            border-radius: 20px;
+        }
+
+        .team-avatar {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                145deg,
+                #8b45ff,
+                #4c218c
+            );
+
+            font-weight: 800;
+            font-size: 22px;
+        }
+
+        .team-card h3 {
+            margin-bottom: 5px;
+        }
+
+        .team-card p {
+            color: #8f899d;
+            font-size: 13px;
+        }
+
+        /* ---------------- CTA ---------------- */
+
+        .cta {
+            text-align: center;
+            padding: 130px 7%;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-glow {
+            position: absolute;
+
+            width: 400px;
+            height: 400px;
+
+            background: #7b32e9;
+            filter: blur(170px);
+            opacity: 0.12;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta h2 {
+            font-size: clamp(38px, 6vw, 65px);
+            letter-spacing: -3px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            color: #9995a6;
+            max-width: 600px;
+            margin: auto auto 30px;
+        }
+
+        /* ---------------- FOOTER ---------------- */
+
+        footer {
+            border-top: 1px solid #17151d;
+
+            padding: 35px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            color: #777281;
+            font-size: 13px;
+        }
+
+        .footer-logo {
+            font-size: 18px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: #9b5cff;
+        }
+
+        .footer-email {
+            transition: 0.2s;
+        }
+
+        .footer-email:hover {
+            color: #b17cff;
+        }
+
+        /* ---------------- MOBILE ---------------- */
+
+        @media (max-width: 850px) {
+
+            nav {
+                padding: 18px 5%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 80px 5%;
+            }
+
+            .intro-grid,
+            .analysis-container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                letter-spacing: -3px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 120px;
+            }
+
+            .concept-box {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+        <a href="#" class="logo">Learn<span>NEU</span></a>
+
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#analysis">Neuro Analysis</a>
+            <a href="#team">Team</a>
+            <a href="mailto:learnneuteam@gmail.com" class="nav-button">
+                Contact
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="glow"></div>
+
+        <div class="hero-content">
+
+            <div class="badge">
+                <span class="badge-dot"></span>
+                A student learning analysis platform
+            </div>
+
+            <h1>
+                Understand how<br>
+                you <span class="purple">learn.</span>
+            </h1>
+
+            <p class="hero-description">
+                LearnNEU helps students observe their learning patterns,
+                understand where they struggle, compare expectations with
+                actual performance, and improve the way they prepare.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#about" class="primary-button">
+                    Explore LearnNEU
+                </a>
+
+                <a href="#features" class="secondary-button">
+                    See how it works
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section class="intro" id="about">
+
+        <div class="intro-grid">
+
+            <div class="intro-text">
+
+                <div class="section-label">
+                    The idea
+                </div>
+
+                <h2 class="section-title">
+                    Learning is more than a score.
+                </h2>
+
+                <p>
+                    Marks tell you what happened.
+                    LearnNEU is designed to help students understand
+                    the learning patterns behind those results.
+                </p>
+
+                <p>
+                    Instead of simply giving another score or another
+                    quiz, LearnNEU brings together learning behaviour,
+                    cognitive indicators, study material, mistakes,
+                    revision and examination performance.
+                </p>
+
+            </div>
+
+
+            <div class="concept-box">
+
+                <div class="concept-title">
+                    LEARNNEU MODEL
+                </div>
+
+                <div class="flow">
+
+                    <div class="flow-item">
+                        <strong>Observe</strong>
+                        <span>Understand patterns</span>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <div class="flow-item">
+                        <strong>Learn</strong>
+                        <span>Study and practise</span>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <div class="flow-item">
+                        <strong>Compare</strong>
+                        <span>Expected vs actual</span>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <div class="flow-item">
+                        <strong>Improve</strong>
+                        <span>Adapt your strategy</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+
+    <section id="features">
+
+        <div class="features">
+
+            <div class="feature-header">
+
+                <div class="section-label">
+                    What LearnNEU brings together
+                </div>
+
+                <h2 class="section-title">
+                    One learning picture.<br>
+                    Not just one number.
+                </h2>
+
+                <p class="section-description">
+                    LearnNEU connects different parts of a student's
+                    learning journey so that performance can be viewed
+                    as a pattern rather than an isolated result.
+                </p>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">◉</div>
+
+                    <h3>BrainScan</h3>
+
+                    <p>
+                        An introductory analysis designed to explore
+                        selected cognitive indicators related to learning,
+                        such as focus and working memory.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">↗</div>
+
+                    <h3>Neuro Analysis</h3>
+
+                    <p>
+                        View learning-related indicators as patterns
+                        instead of treating a single result as a fixed
+                        measure of ability.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">⌁</div>
+
+                    <h3>Material Analysis</h3>
+
+                    <p>
+                        Bring study material into the learning process
+                        and connect preparation with later performance.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">✓</div>
+
+                    <h3>Mistake Bank</h3>
+
+                    <p>
+                        Keep track of mistakes so that incorrect answers
+                        become useful information for future revision.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">↻</div>
+
+                    <h3>Revision</h3>
+
+                    <p>
+                        Turn previous mistakes and learning gaps into
+                        something that can be revisited and improved.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">Δ</div>
+
+                    <h3>Performance Reflection</h3>
+
+                    <p>
+                        Compare expected examination performance with
+                        actual results and reflect on what changed.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- NEURO ANALYSIS -->
+
+    <section class="analysis" id="analysis">
+
+        <div class="analysis-container">
+
+            <div class="brain">
+
+                <div class="orbit one"></div>
+                <div class="orbit two"></div>
+
+                <div class="brain-inner">
+                    🧠
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <div class="section-label">
+                    Neuro Analysis
+                </div>
+
+                <h2 class="section-title">
+                    Know the learner.<br>
+                    Not just the result.
+                </h2>
+
+                <p class="section-description">
+                    LearnNEU explores selected learning-related cognitive
+                    indicators and presents them as part of a broader
+                    learning picture.
+                </p>
+
+                <div class="analysis-points">
+
+                    <div class="analysis-point">
+                        <span class="check">✓</span>
+                        <span>Focus and attention patterns</span>
+                    </div>
+
+                    <div class="analysis-point">
+                        <span class="check">✓</span>
+                        <span>Working-memory related indicators</span>
+                    </div>
+
+                    <div class="analysis-point">
+                        <span class="check">✓</span>
+                        <span>Learning behaviour observations</span>
+                    </div>
+
+                    <div class="analysis-point">
+                        <span class="check">✓</span>
+                        <span>Connections with academic performance</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROCESS -->
+
+    <section>
+
+        <div class="process">
+
+            <div class="section-label">
+                How it works
+            </div>
+
+            <h2 class="section-title">
+                From observation to improvement.
+            </h2>
+
+            <p class="section-description" style="margin:auto;">
+                LearnNEU is built around a continuous learning cycle.
+            </p>
+
+
+            <div class="process-grid">
+
+                <div class="process-card">
+
+                    <div class="process-number">
+                        01
+                    </div>
+
+                    <h3>Observe</h3>
+
+                    <p>
+                        Identify learning patterns and indicators.
+                    </p>
+
+                </div>
+
+
+                <div class="process-card">
+
+                    <div class="process-number">
+                        02
+                    </div>
+
+                    <h3>Learn</h3>
+
+                    <p>
+                        Study, practise and interact with learning material.
+                    </p>
+
+                </div>
+
+
+                <div class="process-card">
+
+                    <div class="process-number">
+                        03
+                    </div>
+
+                    <h3>Compare</h3>
+
+                    <p>
+                        Look at mistakes, expectations and actual outcomes.
+                    </p>
+
+                </div>
+
+
+                <div class="process-card">
+
+                    <div class="process-number">
+                        04
+                    </div>
+
+                    <h3>Improve</h3>
+
+                    <p>
+                        Use the patterns to make better study decisions.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TEAM -->
+
+    <section id="team">
+
+        <div class="team">
+
+            <div class="team-header">
+
+                <div class="section-label">
+                    The team
+                </div>
+
+                <h2 class="section-title">
+                    Built by students.
+                </h2>
+
+                <p class="section-description" style="margin:auto;">
+                    LearnNEU was created as a student-led project combining
+                    neuroscience, research and software development.
+                </p>
+
+            </div>
+
+
+            <div class="team-grid">
+
+                <div class="team-card">
+
+                    <div class="team-avatar">
+                        LA
+                    </div>
+
+                    <h3>Laks</h3>
+
+                    <p>
+                        Research & Software Development
+                    </p>
+
+                </div>
+
+
+                <div class="team-card">
+
+                    <div class="team-avatar">
+                        DA
+                    </div>
+
+                    <h3>Dabs</h3>
+
+                    <p>
+                        Software Development
+                    </p>
+
+                </div>
+
+
+                <div class="team-card">
+
+                    <div class="team-avatar">
+                        AV
+                    </div>
+
+                    <h3>Avan</h3>
+
+                    <p>
+                        Neuroscience & Research
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="cta">
+
+        <div class="cta-glow"></div>
+
+        <div class="cta-content">
+
+            <div class="section-label">
+                Learn differently
+            </div>
+
+            <h2>
+                Your learning has<br>
+                a pattern.
+            </h2>
+
+            <p>
+                LearnNEU is built to help students discover it,
+                reflect on it, and use it to improve.
+            </p>
+
+            <a
+                href="mailto:learnneuteam@gmail.com"
+                class="primary-button"
+                style="display:inline-block;"
+            >
+                Get in touch
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-logo">
+            Learn<span>NEU</span>
+        </div>
+
+        <div>
+            © 2026 LearnNEU · Student-led project
+        </div>
+
+        <a
+            class="footer-email"
+            href="mailto:learnneuteam@gmail.com"
+        >
+            learnneuteam@gmail.com
+        </a>
+
+    </footer>
+
+
+</body>
+</html>
+```
